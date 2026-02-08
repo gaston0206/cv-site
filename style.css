@@ -1,94 +1,72 @@
-/* --- STYLE GLOBAL --- */
+/* --- BASE --- */
+* { box-sizing: border-box; }
 body {
     font-family: "Century Gothic", Calibri, sans-serif;
-    font-size: 14px;
-    margin: 0;
-    padding: 0;
-    color: #333;
+    margin: 0; padding: 0; line-height: 1.6; color: #333;
 }
 
-h1 { font-size: 36px; text-align: center; margin: 20px 0; }
+h1 { text-align: center; margin: 20px 0; }
 header { padding: 20px; background: #fff; }
 
-/* --- NAVIGATION & BURGER --- */
-nav { background-color: #424558; width: 100%; position: relative; }
-.table { display: table; margin: 0 auto; width: auto; }
+/* --- NAVIGATION PC --- */
+nav { background-color: #424558; position: relative; min-height: 60px; }
+.table { display: table; margin: 0 auto; }
+#menu-toggle, .burger-icon { display: none; } /* Caché sur PC */
+
 nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
-nav li { float: left; }
 nav a {
-    display: block;
-    padding: 20px 25px;
-    color: #FFF;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 13px;
-    transition: 0.3s;
+    display: block; padding: 20px 25px;
+    color: #FFF; text-decoration: none;
+    text-transform: uppercase; font-size: 13px;
 }
 
-/* On cache la checkbox et l'icône sur PC */
-#menu-toggle, .burger-icon { display: none; }
-
 /* Couleurs des sections */
-.menu-ind:hover, .presentation { border-top: 5px solid #4C8; background-color: rgba(64, 200, 130, 0.1); }
-.menu-exp:hover, .parcours { border-top: 5px solid #f1dc4f; background-color: rgba(241, 211, 79, 0.1); }
-.menu-loi:hover, .competences { border-top: 5px solid #0070BB; background-color: rgba(0, 112, 192, 0.1); }
-.menu-con:hover, .recommandation { border-top: 5px solid #e44d26; background-color: rgba(228, 77, 38, 0.1); }
+.presentation { border-top: 5px solid #4C8; background: rgba(64, 200, 130, 0.1); }
+.parcours { border-top: 5px solid #f1dc4f; background: rgba(241, 211, 79, 0.1); }
+.competences { border-top: 5px solid #0070BB; background: rgba(0, 112, 192, 0.1); }
+.recommandation { border-top: 5px solid #e44d26; background: rgba(228, 77, 38, 0.1); }
 
-/* --- CONTENU --- */
-section { width: 100%; padding: 40px 0; border-bottom: 1px solid #ddd; }
-.sec { margin: 0 10%; overflow: hidden; }
+/* --- STRUCTURE --- */
+section { padding: 40px 0; }
+.sec { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.sec::after, .exp::after, .reco::after { content: ""; display: table; clear: both; }
 
 .left { float: left; width: 30%; }
 .right { float: left; width: 70%; }
-.image-profil { width: 150px; border-radius: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.image-profil { width: 150px; border-radius: 15px; display: block; }
 
-/* Compétences */
-.cleft, .cright { width: 50%; float: left; }
-.sous { display: flex; justify-content: space-between; border-bottom: 1px solid #ccc; padding: 5px 0; }
-
-/* Clearfix */
-.sec::after, .exp::after, .reco::after { content: ""; display: table; clear: both; }
+/* --- COMPÉTENCES (STYLE CORRIGÉ) --- */
+.competences-container { display: flex; flex-wrap: wrap; gap: 40px; }
+.comp-column { flex: 1; min-width: 300px; }
+.comp-item { 
+    display: flex; justify-content: space-between; 
+    padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1); 
+}
+.header-item { border-bottom: 2px solid #333; }
 
 /* --- FOOTER --- */
 footer { text-align: center; padding: 30px; background: #333; color: #fff; }
-footer .social a { color: #fff; font-size: 24px; margin: 0 10px; text-decoration: none; }
-footer .social a:hover { color: #ff6600; }
+.social a { color: #fff; font-size: 24px; margin: 0 10px; }
 
 /* --- RESPONSIVE MOBILE --- */
 @media screen and (max-width: 780px) {
-    /* Affichage du bouton Burger */
     .burger-icon {
-        display: block;
-        padding: 15px;
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-        text-align: right;
+        display: block; color: white; font-size: 26px;
+        padding: 15px; text-align: right; cursor: pointer;
     }
 
-    /* Le menu est caché par défaut sur mobile */
     nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
+        display: none; flex-direction: column; width: 100%;
+        background: #424558; position: absolute; top: 60px; left: 0; z-index: 100;
     }
 
-    /* Si on clique sur le burger (checkbox cochée), on montre le menu */
-    #menu-toggle:checked ~ ul {
-        display: flex;
-    }
+    #menu-toggle:checked ~ ul { display: flex; } /* Affiche au clic */
 
-    nav li { width: 100%; border-top: 1px solid rgba(255,255,255,0.1); }
-    nav a { padding: 15px; }
+    nav li { width: 100%; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-    /* Empiler les colonnes */
-    .left, .right, .cleft, .cright {
-        float: none;
-        width: 100%;
-        text-align: center;
-    }
-
+    .left, .right { float: none; width: 100%; text-align: center; }
     .image-profil { margin: 0 auto 20px; }
-    .sec { margin: 0 5%; }
+    
+    .competences-container { gap: 20px; }
+    .comp-column { flex: 0 0 100%; }
 }
